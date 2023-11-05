@@ -5,10 +5,15 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/8.3/userguide/building_java_projects.html in the Gradle documentation.
  */
 
-plugins {
+ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-}
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
+
+
+ }
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -17,12 +22,15 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
 
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.1'
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:32.1.1-jre'
+
+
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -40,4 +48,16 @@ application {
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+test {
+    useJUnitPlatform()
+    minHeapSize = "1024m"
+    maxHeapSize = "4096m"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+    }
 }
