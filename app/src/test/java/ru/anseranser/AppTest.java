@@ -4,11 +4,27 @@
 package ru.anseranser;
 
 import org.junit.jupiter.api.Test;
+import ru.anseranser.Binary.Addition;
+import ru.anseranser.Binary.Multiplication;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test void appHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    }
+
+    @Test
+    void additionTest() {
+        System.out.println(Addition.Calculate(10, 20));
+        System.out.println(Addition.Calculate(10_000_000_000L, 20L));
+        System.out.println(Addition.Calculate(10_000_000_000L, 20));
+        System.out.println(Addition.Calculate(10, 20_000_000_000L));
+        System.out.println(Addition.Calculate(10.5, 20.37));
+
+        System.out.println(Multiplication.Calculate(10, 20));
+        System.out.println(Multiplication.Calculate(10L, 20L));
+        System.out.println(Multiplication.Calculate(10.5, 20.37));
     }
 }
